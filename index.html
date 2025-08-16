@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Distribution and Stress Levels</title>
+</head>
+<body>
+    <h1>Emotion Analysis</h1>
+    
+    <!-- Form for selecting a person -->
+    <form method="POST" action="/">
+        <label for="name">Select a Person:</label>
+        <select name="name" id="name" required>
+            <option value="" disabled selected>Select a name</option>
+            {% for name in names %}
+                <option value="{{ name }}" {% if name == selected_name %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if selected_name %}
+        <h2>Results for {{ selected_name }}</h2>
+        <p>Stress Level: <strong>{{ stress_level }}</strong></p>
+        {% if graph %}
+            <h3>Emotion Distribution</h3>
+            <img src="data:image/png;base64,{{ graph }}" alt="Emotion Bar Graph">
+        {% endif %}
+    {% endif %}
+</body>
+</html>
+
+
